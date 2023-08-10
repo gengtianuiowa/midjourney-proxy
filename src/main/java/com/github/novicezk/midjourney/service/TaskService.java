@@ -9,15 +9,24 @@ import java.util.List;
 
 public interface TaskService {
 
-	SubmitResultVO submitImagine(Task task, List<DataUrl> dataUrls);
+  SubmitResultVO submitImagine(Task task, List<DataUrl> dataUrls);
 
-	SubmitResultVO submitUpscale(Task task, String targetMessageId, String targetMessageHash, int index, int messageFlags);
+  SubmitResultVO submitUpscale(
+      Task task, String targetMessageId, String targetMessageHash, int index, int messageFlags);
 
-	SubmitResultVO submitVariation(Task task, String targetMessageId, String targetMessageHash, int index, int messageFlags);
+  SubmitResultVO submitZoom(
+      Task task, String targetMessageId, String targetMessageHash, int index, int messageFlags);
 
-	SubmitResultVO submitReroll(Task task, String targetMessageId, String targetMessageHash, int messageFlags);
+  SubmitResultVO submitVary(
+      Task task, String targetMessageId, String targetMessageHash, int index, int messageFlags);
 
-	SubmitResultVO submitDescribe(Task task, DataUrl dataUrl);
+  SubmitResultVO submitVariation(
+      Task task, String targetMessageId, String targetMessageHash, int index, int messageFlags);
 
-	SubmitResultVO submitBlend(Task task, List<DataUrl> dataUrls, BlendDimensions dimensions);
+  SubmitResultVO submitReroll(
+      Task task, String targetMessageId, String targetMessageHash, int messageFlags);
+
+  SubmitResultVO submitDescribe(Task task, DataUrl dataUrl);
+
+  SubmitResultVO submitBlend(Task task, List<DataUrl> dataUrls, BlendDimensions dimensions);
 }
