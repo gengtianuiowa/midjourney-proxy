@@ -138,7 +138,13 @@ public class SubmitController {
     // 允许Zoom, Vary任务运行
     if (!(Set.of(TaskAction.ZOOM, TaskAction.VARY).contains(changeDTO.getAction())
             && TaskAction.UPSCALE.equals(targetTask.getAction()))
-        && !Set.of(TaskAction.IMAGINE, TaskAction.VARIATION, TaskAction.REROLL, TaskAction.BLEND)
+        && !Set.of(
+                TaskAction.IMAGINE,
+                TaskAction.VARIATION,
+                TaskAction.REROLL,
+                TaskAction.BLEND,
+                TaskAction.ZOOM,
+                TaskAction.VARY)
             .contains(targetTask.getAction())) {
       return SubmitResultVO.fail(ReturnCode.VALIDATION_ERROR, "关联任务不允许执行变化");
     }
