@@ -24,43 +24,43 @@ import java.time.Duration;
 @Configuration
 public class BeanConfig {
 
-	@Bean
-	TranslateService translateService(ProxyProperties properties) {
-		return switch (properties.getTranslateWay()) {
-			case BAIDU -> new BaiduTranslateServiceImpl(properties.getBaiduTranslate());
-			case GPT -> new GPTTranslateServiceImpl(properties);
-			default -> new NoTranslateServiceImpl();
-		};
-	}
+    @Bean
+    TranslateService translateService(ProxyProperties properties) {
+        return switch (properties.getTranslateWay()) {
+            case BAIDU -> new BaiduTranslateServiceImpl(properties.getBaiduTranslate());
+            case GPT -> new GPTTranslateServiceImpl(properties);
+            default -> new NoTranslateServiceImpl();
+        };
+    }
 
-	@Bean
-	TaskStoreService taskStoreService(ProxyProperties proxyProperties, RedisConnectionFactory redisConnectionFactory) {
-		ProxyProperties.TaskStore.Type type = proxyProperties.getTaskStore().getType();
-		Duration timeout = proxyProperties.getTaskStore().getTimeout();
-		return switch (type) {
-			case IN_MEMORY -> new InMemoryTaskStoreServiceImpl(timeout);
-			case REDIS -> new RedisTaskStoreServiceImpl(timeout, taskRedisTemplate(redisConnectionFactory));
-		};
-	}
+    @Bean
+    TaskStoreService taskStoreService(ProxyProperties proxyProperties, RedisConnectionFactory redisConnectionFactory) {
+        ProxyProperties.TaskStore.Type type = proxyProperties.getTaskStore().getType();
+        Duration timeout = proxyProperties.getTaskStore().getTimeout();
+        return switch (type) {
+            case IN_MEMORY -> new InMemoryTaskStoreServiceImpl(timeout);
+            case REDIS -> new RedisTaskStoreServiceImpl(timeout, taskRedisTemplate(redisConnectionFactory));
+        };
+    }
 
-	@Bean
-	RedisTemplate<String, Task> taskRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
-		RedisTemplate<String, Task> redisTemplate = new RedisTemplate<>();
-		redisTemplate.setConnectionFactory(redisConnectionFactory);
-		redisTemplate.setKeySerializer(new StringRedisSerializer());
-		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-		redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(Task.class));
-		return redisTemplate;
-	}
+    @Bean
+    RedisTemplate<String, Task> taskRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Task> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(Task.class));
+        return redisTemplate;
+    }
 
-	@Bean
-	WebSocketStarter webSocketStarter(ProxyProperties properties) {
-		return new UserWebSocketStarter(properties);
-	}
+    @Bean
+    WebSocketStarter webSocketStarter(ProxyProperties properties) {
+        return new UserWebSocketStarter(properties);
+    }
 
-	@Bean
-	ApplicationRunner enableMetaChangeReceiverInitializer(WebSocketStarter webSocketStarter) {
-		return args -> webSocketStarter.start();
-	}
+    @Bean
+    ApplicationRunner enableMetaChangeReceiverInitializer(WebSocketStarter webSocketStarter) {
+        return args -> webSocketStarter.start();
+    }
 
 }
