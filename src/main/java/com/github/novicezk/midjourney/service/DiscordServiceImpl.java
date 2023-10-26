@@ -222,7 +222,6 @@ public class DiscordServiceImpl implements DiscordService {
     }
     return Message.failure("发送图片消息到discord失败: 图片不存在");
   }
-
   @Override
   public Message<Void> zoom(
       String messageId, int index, String messageHash, int messageFlags, String nonce) {
@@ -267,6 +266,7 @@ public class DiscordServiceImpl implements DiscordService {
     headers.setContentType(MediaType.APPLICATION_JSON);
     headers.set("Authorization", this.discordUserToken);
     headers.add("User-Agent", this.userAgent);
+//    paramsStr = "{\"type\":2,\"application_id\":\"936929561302675456\",\"guild_id\":\"1136680226361975036\",\"channel_id\":\"1136680226361975039\",\"session_id\":\"2fa61761d418569e509a55fccbd22e93\",\"data\":{\"version\":\"1166847114203123795\",\"id\":\"938956540159881230\",\"name\":\"imagine\",\"type\":1,\"options\":[{\"type\":3,\"name\":\"prompt\",\"value\":\"ttt\"}],\"application_command\":{\"id\":\"938956540159881230\",\"application_id\":\"936929561302675456\",\"version\":\"1166847114203123795\",\"default_member_permissions\":null,\"type\":1,\"nsfw\":false,\"name\":\"imagine\",\"description\":\"Create images with Midjourney\",\"dm_permission\":true,\"contexts\":null,\"integration_types\":[0],\"options\":[{\"type\":3,\"name\":\"prompt\",\"description\":\"The prompt to imagine\",\"required\":true}]},\"attachments\":[]},\"nonce\":\"1167165849899892736\"}";
     HttpEntity<String> httpEntity = new HttpEntity<>(paramsStr, headers);
     return new RestTemplate().postForEntity(url, httpEntity, String.class);
   }
