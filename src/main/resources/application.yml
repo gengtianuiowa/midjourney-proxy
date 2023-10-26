@@ -1,23 +1,17 @@
+# 调试时这里可以切换为自己的配置
 mj:
   discord:
-    guild-id: 1136680226361975036
-    channel-id: 1136680226361975039
-    user-token: NjMxNTQ0NjY0ODIxOTg5NDE2.GTsHTs.6qN6643Bg4PlU5inR8XaHtKkk1Abq3iFS8UVuQ
-    session-id: 6a541f44b9d75146210835297216b1c3
     user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
   task-store:
     type: redis
     timeout: 30d
+  translate-way: null
   queue:
     timeout-minutes: 5
     core-size: 3
     queue-size: 10
-  translate-way: gpt
-  openai:
-    gpt-api-key: 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
 spring:
   redis:
     host: 43.134.83.189
-    #    host: 129.226.152.233
     port: 6379
     password: letsgoteam.123456
