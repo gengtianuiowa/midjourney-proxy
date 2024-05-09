@@ -13,11 +13,7 @@
 
     <groupId>com.github.novicezk</groupId>
     <artifactId>midjourney-proxy</artifactId>
-<<<<<<< HEAD
-    <version>2.5.4</version>
-=======
     <version>2.6.2</version>
->>>>>>> f2b4010 (release: v2.6.2 (#339))
 
     <properties>
         <hutool.version>5.8.18</hutool.version>
